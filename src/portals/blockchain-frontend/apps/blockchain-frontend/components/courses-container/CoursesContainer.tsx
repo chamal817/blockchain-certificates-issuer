@@ -1,12 +1,14 @@
-import { Typography, Button, Table, DatePicker, Form, Input } from 'antd';
-import { PlusOutlined } from '@ant-design/icons/lib/icons';
+import { Typography, Button, Table, DatePicker, Form, Input, Modal, message } from 'antd';
+import { PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons/lib/icons';
 import { DeleteOutlined } from '@ant-design/icons';
 import styles from './CoursesContainer.module.css';
 import { useComponentState, useFetchCourseEffect } from './state';
 import { useEffect } from 'react';
 import { DefaultPagination } from '../../interfaces/enums'
+import DeleteConfirmation from '../delete-container/DeleteConfirmation';
 export default function CoursesContainer() {
-  const { formik, deleteCourse,dataSource,fetchCourses } = useComponentState();
+  const { confirm } = Modal;
+  const { formik, dataSource, fetchCourses } = useComponentState();
   const {
     handleSubmit,
     handleChange,
@@ -46,11 +48,9 @@ export default function CoursesContainer() {
       render: (data) => {
         return (
           <>
-            <DeleteOutlined
-              onClick={() => {
-                deleteCourse(data.Id);
-              }}
-              style={{ color: 'red', marginLeft: 4 }}
+            <DeleteConfirmation
+              itemName={data.Type}
+              id={data.Id}
             />
           </>
         );
@@ -61,6 +61,21 @@ export default function CoursesContainer() {
   const handlePaginationChange = (pageNumber: number, pageSize: number | undefined) => {
     fetchCourses(pageNumber, pageSize ?? DefaultPagination.pageSize);
   };
+
+  // const handleDelete = (id) => {
+  //   confirm({
+  //     title: 'Are you sure you want to delete this course?',
+  //     icon: <ExclamationCircleOutlined />,
+  //     onOk() {
+  //       deleteCourse(id).then((success => {
+  //         if (success) {
+  //           message.success('Course deleted successfully');
+  //         }
+  //       }));
+  //     },
+  //     onCancel() { },
+  //   });
+  // };
   return (
     <div className={styles['container']}>
       <div className={styles['content']}>
@@ -133,7 +148,7 @@ export default function CoursesContainer() {
         </div>
         <div id="course-grid">
           <Table
-          key={'1'}
+            key={'1'}
             loading={false}
             columns={columns}
             dataSource={dataSource}

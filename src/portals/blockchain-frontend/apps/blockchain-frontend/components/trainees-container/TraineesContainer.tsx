@@ -1,12 +1,12 @@
 import { Typography, Button, Table, DatePicker, Form, Input } from 'antd';
 import styles from './TraineesContainer.module.css';
 import { useComponentState, useFetchTraineesEffect } from './state';
-import { DeleteOutlined } from '@ant-design/icons';
 import { PlusOutlined } from '@ant-design/icons/lib/icons';
 import { DefaultPagination } from 'apps/blockchain-frontend/interfaces/enums';
+import DeleteConfirmation from '../delete-container/DeleteConfirmation';
 export default function TraineesContainer() {
     const { Title } = Typography;
-    const { formik, deleteTrainee, dataSource, fetchTrainees } = useComponentState();
+    const { formik, dataSource, fetchTrainees } = useComponentState();
     const {
         handleSubmit,
         handleChange,
@@ -36,11 +36,9 @@ export default function TraineesContainer() {
             render: (data) => {
                 return (
                     <>
-                        <DeleteOutlined
-                            onClick={() => {
-                                deleteTrainee(data.Id);
-                            }}
-                            style={{ color: 'red', marginLeft: 4 }}
+                        <DeleteConfirmation
+                            itemName={data.Type}
+                            id={data.Id}
                         />
                     </>
                 );

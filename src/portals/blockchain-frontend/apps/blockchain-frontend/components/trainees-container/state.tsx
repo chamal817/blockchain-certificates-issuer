@@ -5,11 +5,7 @@ import { useFormik } from 'formik';
 import { DefaultPagination } from "apps/blockchain-frontend/interfaces/enums";
 
 export function useComponentState() {
-    const [dataSource, setDataSource] = useState([]);
-    const deleteTrainee = (id) => {
-      throw new Error('Not implemented');
-    };
-  
+    const [dataSource, setDataSource] = useState([]);  
     const createNewTrainee = async (values) => {
       let trainer: TraineeRequest = {
           FirstName : values.firstName,
@@ -66,7 +62,7 @@ export function useComponentState() {
     };
   
   
-    return { formik, deleteTrainee, dataSource, fetchTrainees };
+    return { formik, dataSource, fetchTrainees };
   }
   export const useFetchTraineesEffect = (fetchTrainees) => {
     useEffect(() => {

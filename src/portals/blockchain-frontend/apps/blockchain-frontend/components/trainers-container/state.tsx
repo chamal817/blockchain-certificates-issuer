@@ -6,10 +6,6 @@ import { DefaultPagination } from "apps/blockchain-frontend/interfaces/enums";
 
 export function useComponentState() {
     const [dataSource, setDataSource] = useState([]);
-    const deleteTrainer = (id) => {
-      throw new Error('Not implemented');
-    };
-  
     const createNewTrainer = async (values) => {
       let trainer: TrainerRequest = {
           FirstName : values.firstName,
@@ -66,7 +62,7 @@ export function useComponentState() {
     };
   
   
-    return { formik, deleteTrainer, dataSource, fetchTrainers };
+    return { formik, dataSource, fetchTrainers };
   }
   export const useFetchTrainersEffect = (fetchTrainers) => {
     useEffect(() => {

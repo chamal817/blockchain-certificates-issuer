@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import axios from 'axios';
-import type { Course } from 'apps/blockchain-frontend/interfaces/models';
 import { CourseRequest, CourseResponse } from 'apps/blockchain-frontend/interfaces/viewModels';
 import { createCourse, getCourse } from 'apps/blockchain-frontend/api/fetchData';
 import { DefaultPagination } from 'apps/blockchain-frontend/interfaces/enums';
 
 export function useComponentState() {
   const [dataSource, setDataSource] = useState([]);
-  const deleteCourse = (id) => {
-    throw new Error('Not implemented');
-  };
+ 
 
   const createNewCourse = async (values) => {
     let course: CourseRequest = {
@@ -72,13 +68,13 @@ export function useComponentState() {
     const formattedData = courseRes.map((item) => {
       const formattedStartDate = new Date(item.StartDate).toLocaleDateString();
       const formattedEndDate = new Date(item.EndDate).toLocaleDateString();
-      return { ...item, StartDate: formattedStartDate, EndDate: formattedEndDate,key: item.Id};
+      return { ...item, StartDate: formattedStartDate, EndDate: formattedEndDate, key: item.Id };
     });
     setDataSource(formattedData);
   };
 
 
-  return { formik, deleteCourse, dataSource, fetchCourses };
+  return { formik, dataSource, fetchCourses };
 }
 export const useFetchCourseEffect = (fetchCourses) => {
   useEffect(() => {
