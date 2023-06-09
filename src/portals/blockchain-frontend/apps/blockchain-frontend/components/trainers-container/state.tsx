@@ -60,12 +60,9 @@ export function useComponentState() {
       setDataSource(formattedData);
  
     };
-  
-  
-    return { formik, dataSource, fetchTrainers };
-  }
-  export const useFetchTrainersEffect = (fetchTrainers) => {
     useEffect(() => {
       fetchTrainers(DefaultPagination.pageNumber, DefaultPagination.pageSize);
     }, []);
+  
+    return { formik, dataSource, fetchTrainers };
   }

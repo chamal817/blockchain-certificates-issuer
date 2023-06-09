@@ -2,8 +2,7 @@ import { Typography, Button, Table, DatePicker, Form, Input, Modal, message } fr
 import { PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons/lib/icons';
 import { DeleteOutlined } from '@ant-design/icons';
 import styles from './CoursesContainer.module.css';
-import { useComponentState, useFetchCourseEffect } from './state';
-import { useEffect } from 'react';
+import { useComponentState } from './state';
 import { DefaultPagination } from '../../interfaces/enums'
 import DeleteConfirmation from '../delete-container/DeleteConfirmation';
 export default function CoursesContainer() {
@@ -57,7 +56,7 @@ export default function CoursesContainer() {
       },
     },
   ];
-  useFetchCourseEffect(fetchCourses)
+
   const handlePaginationChange = (pageNumber: number, pageSize: number | undefined) => {
     fetchCourses(pageNumber, pageSize ?? DefaultPagination.pageSize);
   };
@@ -148,7 +147,6 @@ export default function CoursesContainer() {
         </div>
         <div id="course-grid">
           <Table
-            key={'1'}
             loading={false}
             columns={columns}
             dataSource={dataSource}

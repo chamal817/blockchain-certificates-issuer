@@ -1,6 +1,6 @@
-import { Typography, Button, Table, DatePicker, Form, Input } from 'antd';
+import { Typography, Button, Table, Form, Input } from 'antd';
 import styles from './TrainersContainer.module.css';
-import { useComponentState, useFetchTrainersEffect } from './state';
+import { useComponentState } from './state';
 import { PlusOutlined } from '@ant-design/icons/lib/icons';
 import { DefaultPagination } from 'apps/blockchain-frontend/interfaces/enums';
 import DeleteConfirmation from '../delete-container/DeleteConfirmation';
@@ -45,7 +45,7 @@ export default function TrainersContainer() {
             },
         },
     ];
-    useFetchTrainersEffect(fetchTrainers)
+
     const handlePaginationChange = (pageNumber: number, pageSize: number | undefined) => {
         fetchTrainers(pageNumber, pageSize ?? DefaultPagination.pageSize);
     };
@@ -97,7 +97,7 @@ export default function TrainersContainer() {
                         </Form.Item>
                         <Form.Item>
                             <Button htmlType="submit" icon={<PlusOutlined />} type="primary">
-                                Add Courses
+                                Add Trainer
                             </Button>
                         </Form.Item>
                     </Form>
